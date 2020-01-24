@@ -1,0 +1,46 @@
+﻿# Datum : 10-1-2020
+#
+# Dit bestand bevat ip adressen die worden overgeslagen en regels die juist verwerkt moeten worden.
+# ook server informatie waar de log bestanden van IIS staan
+#
+## Waar moet de log naar geschreven worden, wat moet de kop zijn en waar de logs van het programma
+inputFolder|D:\huub_van_amelsvoort\data\iis_advancedlog\
+logKop|#Fields:  date time cs-uri-query s-contentpath sc-status s-computername cs(Referer) sc-bytes cs-bytes c-ip cs(Host) cs-method cs(User-Agent) s-ip X-Forwarded-For sc-substatus s-port cs-version c-protocol cs(Cookie) TimeTakenMS cs-uri-stem
+logbestand|D:\huub_van_amelsvoort\data\uitvoer\
+#
+## De servers die in aanmerking komen voor het verwerken van de logs
+server|SWA339
+server|SWA341
+#
+## Hierna de ip adressen die moeten worden overgeslagen
+## Volgende 2 ip van de NAM server
+skipip|10.11.30.190
+skipip|10.11.30.180
+## Volgende ip van een externe Analytics tool
+skipip|10.42.60.145
+## Volgende heeft Huub zich bij aangemeld met Den Haag account
+skipip|UptimeRobot
+##
+## 217.68.50. lijkt ook van HAAGnet te komen (bijvoorbeeld 217.68.50.142)
+#
+##https://maps.ot.denhaag.nl/GeoWeb52H5/Index.html?configBase=https://maps.ot.denhaag.nl/Geocortex/Essentials/GeoWeb52/REST/sites/V3_1_WebGIS/viewers/WebGIS1/virtualdirectory/Resources/Config/Default
+##https://maps.ot.denhaag.nl/GeoWeb52SL/Viewer.html?ViewerConfig=https://maps.ot.denhaag.nl/Geocortex/Essentials/GeoWeb52/REST/sites/V3_1_WebGIS/viewers/WebGIS_SL/virtualdirectory/Config/Viewer.xml
+
+verwerk|REST\\viewer
+# + betekend dat alles waar moet zijn
+verwerk|s_contentpath=GeoWeb+cs_uri_query=configBase
+verwerk|s_contentpath=GeoWeb+cs_uri_query=ViewerConfig
+#
+## iislog|\\swa340o\z$\IIS\AdvancedLogs\ moet de swa742o worden maar kan niet worden benadert
+## iislog|\\swa339o\z$\IIS\AdvancedLogs\ moet de swa743o worden maar kan niet worden benadert
+## iislog|\\swa341t\z$\IIS\AdvancedLogs\ moet de swa742t worden maar kan niet worden benadert
+## iislog|\\swa339t\z$\IIS\AdvancedLogs\ moet de swa743t worden maar kan niet worden benadert
+iislog|\\swa340a\logcopies_functioneel_beheer
+iislog|\\sw452\logcopies_functioneel_beheer
+
+# tabellen
+tabel|powerbi_cumul_aantal_viewer
+tabel|powerbi_cumul_gebruiker
+tabel|powerbi_cumul_herkomst
+tabel|powerbi_cumul_runs
+##tabel|powerbi_cumul_service_tijdsduur # deze in de toekomst eventueel weer vullen via apart prog

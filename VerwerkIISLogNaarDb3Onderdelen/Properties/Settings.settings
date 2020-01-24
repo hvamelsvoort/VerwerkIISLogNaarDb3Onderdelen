@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VerwerkIISLogNaarDb3Onderdelen.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Host={0};User ID={1};Password={2};Database={3};Pooling=true</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
