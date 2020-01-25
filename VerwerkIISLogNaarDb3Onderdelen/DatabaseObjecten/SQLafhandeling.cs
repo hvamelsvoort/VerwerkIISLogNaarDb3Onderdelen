@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using VerwerkIISLogNaarDb3Onderdelen.Properties;
 
 namespace VerwerkIISLogNaarDb3Onderdelen {
-  internal class MySQLafhandeling {
+  internal class SQLafhandeling {
 
     private HashSet<IISLogObject> lijstIISLogObjecten;
 
@@ -21,7 +21,7 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     /**
      * Constructor voor het ontvangen van de iislog objecten
      */
-    public MySQLafhandeling(HashSet<IISLogObject> lijstIISLogObjecten) {
+    public SQLafhandeling(HashSet<IISLogObject> lijstIISLogObjecten) {
       this.LijstIISLogObjecten = lijstIISLogObjecten;
     }
 
@@ -189,27 +189,43 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     //    string conString = "Host=127.0.0.1;User ID=postgres;Password=Webgis_2019_07;Database=huubs_database;Connection Lifetime = 0";
 
     private string bepaalConnectie() {
-      String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "huubs_database");
-      //String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "postgres");
+      //String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "huubs_database");
+      // if ()
+      String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "postgres");
       return connectie;
     }
 
     /**
 * Openen van de database voor het lezen
+* Zorg dat op een nieuw systeem het volgende is geinstalleerd om database te kunnen zien:
+* https://marketplace.visualstudio.com/items?itemName=RojanskyS.NpgsqlPostgreSQLIntegration
+* 
+* Bij een foutmelding
+* Kan bestand of assembly System.Threading.Tasks.Extensions
+, Version=4.2.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51 
+of een van de afhankelijkheden hiervan niet laden. 
+Het systeem kan het opgegeven bestand niet vinden.
+* 
+* 
+* Toevoegen aan VerwerkIISLogNaarDb3Onderdelen\VerwerkIISLogNaarDb3Onderdelen\VerwerkIISLogNaarDb3Onderdelen.csproj
+* 
+*   <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"> 
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath> 
+    </Reference>
+
 */
     internal void openenVerbindingSchrijven() {
       verbindingSchrijven = new NpgsqlConnection();
-      //Npgsql.PoolManager.TryGetValue("key", "ConnectorPool & pool");
-      //Npgsql.NpgsqlConnection.GetPoolAndSettings();
+      String connectieString = bepaalConnectie(); // conString;
 
       try {
-
-        verbindingSchrijven.ConnectionString = bepaalConnectie(); // conString;
+        verbindingSchrijven.ConnectionString = "Host=127.0.0.1;Port=5432;Database=postgres;User ID=postgres;Password=Kort_3295";// connectieString;
         verbindingSchrijven.Open();
       } catch (Exception e) {
         DeFuncties.HuubLog("Foute NpgsqlConnection verbindingSchrijven. Programma wordt afgebroken !!!! " + e.Message, false);
         DeFuncties.HuubLog("Foute NpgsqlConnection verbindingSchrijven. Programma wordt afgebroken !!!! " + e.Message, true);
         // Om te voorkomen bij verkeerd wachtwoord lock op de database direct programma afsluiten bij Exception
+        //e.StackTrace
         System.Environment.Exit(-3295);
       }
     }

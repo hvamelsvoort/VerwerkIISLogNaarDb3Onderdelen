@@ -12,7 +12,7 @@ namespace VerwerkIISLogNaarDb3Onderdelen.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,13 +25,25 @@ namespace VerwerkIISLogNaarDb3Onderdelen.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Host={0};User ID={1};Password={2};Database={3};Pooling=true")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Host={0};Port=5432;Database={3};User ID={1};Password={2}")]
         public string DS {
             get {
                 return ((string)(this["DS"]));
             }
             set {
                 this["DS"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Host={0};User ID={1};Password={2};Database={3};Pooling=true")]
+        public string AltDS {
+            get {
+                return ((string)(this["AltDS"]));
+            }
+            set {
+                this["AltDS"] = value;
             }
         }
     }

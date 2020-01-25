@@ -19,14 +19,14 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     public static StreamWriter logBestand;
     public static DateTime behandelDatum = DateTime.Now;
 
-    private static MySQLafhandeling mySQLafhandeling;
+    private static SQLafhandeling mySQLafhandeling;
 
     // Volledige IISLog regel object
     public HashSet<IISLogObject> lijstIISLogObjecten = new HashSet<IISLogObject>();
     internal static bool automatisch;
 
     public DeFuncties() {
-      mySQLafhandeling = new MySQLafhandeling(lijstIISLogObjecten);
+      mySQLafhandeling = new SQLafhandeling(lijstIISLogObjecten);
     }
 
     /**
