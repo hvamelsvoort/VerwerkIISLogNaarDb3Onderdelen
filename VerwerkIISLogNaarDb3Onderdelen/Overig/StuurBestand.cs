@@ -16,6 +16,7 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     public String LogBestand = @"D:\huub_van_amelsvoort\data\";
     public String InputFolder = @"D:\huub_van_amelsvoort\data\iis_advancedlog\";
     public string LogKop = "#Fields:  date time cs-uri-query s-contentpath sc-status s-computername cs(Referer) sc-bytes cs-bytes c-ip cs(Host) cs-method cs(User-Agent) s-ip X-Forwarded-For sc-substatus s-port cs-version c-protocol cs(Cookie) TimeTakenMS cs-uri-stem";
+    public string ConnectString = "Host={0};User ID={1};Password={2};Database={3};Pooling=true";
 
     public StuurBestand() {
       try {
@@ -32,6 +33,7 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
             if (regel.Contains(String.Format("logbestand{0}", scheidingsTeken))) LogBestand = regel.Split(scheidingsTeken)[1];
             if (regel.Contains(String.Format("inputFolder{0}", scheidingsTeken))) InputFolder = regel.Split(scheidingsTeken)[1];
             if (regel.Contains(String.Format("logKop{0}", scheidingsTeken))) LogKop = regel.Split(scheidingsTeken)[1];
+            if (regel.Contains(String.Format("ConnectString{0}", scheidingsTeken))) ConnectString = regel.Split(scheidingsTeken)[1];
           }
         }
       } catch (Exception e) {

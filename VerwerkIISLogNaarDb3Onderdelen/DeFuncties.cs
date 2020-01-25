@@ -149,7 +149,7 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
       } catch (Exception e) {
         HuubLog("Fout in ophalenCredentials : " + e.Message);
       }
-      return "FoutWachtwoord";
+      return null ;
     }
 
     /**
@@ -157,6 +157,11 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
      */
     internal static void verwerkDeLogsObjecten() {
       mySQLafhandeling.wachtwoord = ophalenCredentials("postgres");
+      if (mySQLafhandeling.wachtwoord == null || mySQLafhandeling.wachtwoord.Length < 2) {
+        Console.WriteLine("Wachtwoord niet gevonden !! Programma stopt.");
+        System.Environment.Exit(-3295);
+      }
+
 
       mySQLafhandeling.verwerkDeLogsObjecten();
     }

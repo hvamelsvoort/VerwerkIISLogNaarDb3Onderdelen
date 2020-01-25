@@ -8,7 +8,6 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
 
     private HashSet<IISLogObject> lijstIISLogObjecten;
 
-    string conString = Settings.Default.DS;
     public String wachtwoord = ""; // wordt gezet in aanroepende Verwerk
 
     private NpgsqlConnection verbindingSchrijven;
@@ -124,27 +123,6 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
       voorverwerken();
 
       foreach (IISLogObject iislog in LijstIISLogObjecten) {
-        //if (iislog.s_contentpath.Contains("\\run")) verwerkRuns(iislog);
-
-        ////        if (iislog.s_contentpath.Contains("WebGIS_Splash")) verwerkAantalViewer(iislog); 14-9-2018 leek het er op dat veel via een andere route binnen komen.
-
-        //// Volgende lijkt voorlopig zowel bij Silverlight als bij HTML 5 voor te komen als de viewer wordt opgestart
-        //if (iislog.s_contentpath.Contains("REST\\viewer")) {
-        //  VerwerkAantalViewer(iislog);
-        //}
-
-        //// Indien viewer als favoriet wordt ingesteld, dan is de volgende constructie waar, dus rechtstreekse aanroep
-        //if (
-        //  iislog.s_contentpath.Contains("GeoWeb")
-        //  &&
-        //  (
-        //  iislog.cs_uri_query.Contains("configBase")
-        //  ||
-        //  iislog.cs_uri_query.Contains("ViewerConfig")
-        //  )
-        //  ) {
-        //  VerwerkAantalViewer(iislog);
-        //}
         foreach (string verwerk in DeFuncties.stuurBestand.teVerwerken) {
           int tellerConditie = 0;
           if (verwerk.Contains("+")) {
@@ -164,7 +142,6 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
             }
           }
         }
-
       }
     }
 
@@ -183,15 +160,9 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
         System.Environment.Exit(-3295);
       }
     }
-    // Volgende voor Postgres
-    // User ID=root;Password=myPassword;Host=localhost;Port=5432;Database=myDataBase;
-    // Pooling=true;Min Pool Size=0;Max Pool Size=100;Connection Lifetime = 0;
-    //    string conString = "Host=127.0.0.1;User ID=postgres;Password=Webgis_2019_07;Database=huubs_database;Connection Lifetime = 0";
 
     private string bepaalConnectie() {
-      //String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "huubs_database");
-      // if ()
-      String connectie = String.Format(conString, "127.0.0.1", "postgres", wachtwoord, "postgres");
+      String connectie = String.Format(DeFuncties.stuurBestand.ConnectString, wachtwoord);
       return connectie;
     }
 
@@ -213,19 +184,20 @@ Het systeem kan het opgegeven bestand niet vinden.
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath> 
     </Reference>
 
+The type initializer for 'Npgsql.PoolManager' threw an exception
+      uiteindelijk opgelost door naar een oudere versie te gaan van Npgsql 4.0.9
+
 */
     internal void openenVerbindingSchrijven() {
       verbindingSchrijven = new NpgsqlConnection();
-      String connectieString = bepaalConnectie(); // conString;
 
       try {
-        verbindingSchrijven.ConnectionString = "Host=127.0.0.1;Port=5432;Database=postgres;User ID=postgres;Password=Kort_3295";// connectieString;
+        verbindingSchrijven.ConnectionString = bepaalConnectie();
         verbindingSchrijven.Open();
       } catch (Exception e) {
         DeFuncties.HuubLog("Foute NpgsqlConnection verbindingSchrijven. Programma wordt afgebroken !!!! " + e.Message, false);
         DeFuncties.HuubLog("Foute NpgsqlConnection verbindingSchrijven. Programma wordt afgebroken !!!! " + e.Message, true);
         // Om te voorkomen bij verkeerd wachtwoord lock op de database direct programma afsluiten bij Exception
-        //e.StackTrace
         System.Environment.Exit(-3295);
       }
     }
@@ -357,8 +329,7 @@ Het systeem kan het opgegeven bestand niet vinden.
         DeFuncties.HuubLog(String.Format("Fout in het schrijven : {0} bij computer : {1} datum : {2} uur: {3}", e.Message, iislog.s_computername, iislog.datum, uur), false);
       }
 
-      //      long id = commando.LastInsertedId;
-      //long id = commando.
+      // long id = commando.LastInsertedId; // MySQL
 
       sluitenSchrijven();
     }
@@ -445,7 +416,6 @@ Het systeem kan het opgegeven bestand niet vinden.
     /*
      ##########################################################################
     */
-
 
     private bool bestaatGebruiker(GebruikerObject gebruikerObject) {
       string sql = "select * from powerbi_cumul_gebruiker where " +

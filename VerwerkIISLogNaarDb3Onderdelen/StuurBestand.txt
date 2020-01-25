@@ -3,10 +3,12 @@
 # Dit bestand bevat ip adressen die worden overgeslagen en regels die juist verwerkt moeten worden.
 # ook server informatie waar de log bestanden van IIS staan
 #
-## Waar moet de log naar geschreven worden, wat moet de kop zijn en waar de logs van het programma
+## Waar moet de log naar geschreven worden, wat moet de kop zijn en waar de logs van het programma staan
 inputFolder|D:\huub_van_amelsvoort\data\iis_advancedlog\
 logKop|#Fields:  date time cs-uri-query s-contentpath sc-status s-computername cs(Referer) sc-bytes cs-bytes c-ip cs(Host) cs-method cs(User-Agent) s-ip X-Forwarded-For sc-substatus s-port cs-version c-protocol cs(Cookie) TimeTakenMS cs-uri-stem
 logbestand|D:\huub_van_amelsvoort\data\uitvoer\
+## Connectie string voor postgres. Voor de gebruiker het wachtwoord in de Credential manager op slaan.
+ConnectString|Host=127.0.0.1;User ID=postgres;Password={0};Database=postgres;Pooling=true
 #
 ## De servers die in aanmerking komen voor het verwerken van de logs
 server|SWA339
@@ -30,7 +32,7 @@ verwerk|REST\\viewer
 # + betekend dat alles waar moet zijn
 verwerk|s_contentpath=GeoWeb+cs_uri_query=configBase
 verwerk|s_contentpath=GeoWeb+cs_uri_query=ViewerConfig
-#
+### Uit op een ander systeem waar de data niet kan worden benadert
 ## iislog|\\swa340o\z$\IIS\AdvancedLogs\ moet de swa742o worden maar kan niet worden benadert
 ## iislog|\\swa339o\z$\IIS\AdvancedLogs\ moet de swa743o worden maar kan niet worden benadert
 ## iislog|\\swa341t\z$\IIS\AdvancedLogs\ moet de swa742t worden maar kan niet worden benadert

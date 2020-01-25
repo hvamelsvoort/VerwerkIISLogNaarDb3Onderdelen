@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using VerwerkIISLogNaarDb3Onderdelen.Properties;
 
 namespace VerwerkIISLogNaarDb3Onderdelen {
   internal class Verwerk {
@@ -12,14 +11,15 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     private DeFuncties deFuncties;
     private List<IISLogBestandObject> iisLogBestanden = new List<IISLogBestandObject>();
     private bool swGoedeRegel;
-
+    /**
+     * Instantie met DeFuncties
+     */
     public Verwerk(DeFuncties deFuncties) {
       this.deFuncties = deFuncties;
     }
 
     /**
-     * Controleer of er 2 argumenten zijn meegegeven
-     * computernaam datum
+     * Controleer of de datum wordt meegegeven
      */
     internal bool CheckArgs(string[] args) {
       DeFuncties.automatisch = false;
@@ -49,7 +49,6 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
           return false;
         }
       }
-      // Settings.Default.LogBestandVerhuisdStuurBestand,
       DeFuncties.LogBestandNaam = String.Format("{0}\\VerwerkIISLogNaarDb3Onderdelen_{1}{2}.log", DeFuncties.stuurBestand.LogBestand 
         ,  DeFuncties.behandelDatum.ToString("yyyyMMdd"), DeFuncties.automatisch);
 
@@ -151,12 +150,12 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     }
     /**
      * Deze functie nog voor het uitsplitsen van de regel
-     * met name de Zabbix checks buiten beschouwing houden (ip adres )
+     * met name o.a. de Zabbix checks buiten beschouwing houden (ip adres )
      * maar ook bedrijven die onderzoek doen naar onze geoservices.denhaag.nl voor beschikbaarheid.
      */
     private bool voorSelectieRegel(string regel) {
 
-      if (regel.StartsWith("#")) return false;
+      if (regel.StartsWith("#")) return false; // is een van de kopregels, die is al verwerkt
 
       foreach (string ipAdres in DeFuncties.stuurBestand.skipIp) {
         String controleIp = String.Format(" \"{0}\" ", ipAdres);

@@ -22,29 +22,5 @@ namespace VerwerkIISLogNaarDb3Onderdelen.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Host={0};Port=5432;Database={3};User ID={1};Password={2}")]
-        public string DS {
-            get {
-                return ((string)(this["DS"]));
-            }
-            set {
-                this["DS"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Host={0};User ID={1};Password={2};Database={3};Pooling=true")]
-        public string AltDS {
-            get {
-                return ((string)(this["AltDS"]));
-            }
-            set {
-                this["AltDS"] = value;
-            }
-        }
     }
 }
