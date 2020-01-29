@@ -37,8 +37,9 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
           }
         }
       } catch (Exception e) {
-        Console.WriteLine("Geen StuurBestand aanwezig !!?? " + e.Message);
-        Debug.WriteLine("Geen StuurBestand aanwezig !!?? " + e.Message);
+        Console.WriteLine("Geen StuurBestand aanwezig !! Programma wordt afgesloten !! " + e.Message);
+        Debug.WriteLine("Geen StuurBestand aanwezig !! Programma wordt afgesloten !! " + e.Message);
+        System.Environment.Exit(-3295);
       }
     }
 
