@@ -37,8 +37,10 @@ verwerk|s_contentpath=GeoWeb+cs_uri_query=ViewerConfig
 ## iislog|\\swa339o\z$\IIS\AdvancedLogs\ moet de swa743o worden maar kan niet worden benadert
 ## iislog|\\swa341t\z$\IIS\AdvancedLogs\ moet de swa742t worden maar kan niet worden benadert
 ## iislog|\\swa339t\z$\IIS\AdvancedLogs\ moet de swa743t worden maar kan niet worden benadert
-## iislog|\\swa340a\logcopies_functioneel_beheer
-## iislog|\\sw452\logcopies_functioneel_beheer
+iislog|\\swa340a.acc.haagnet.net\logcopies_functioneel_beheer
+iislog|\\sw452\logcopies_functioneel_beheer
+## toekomst NAS    iislog|\\hnas1-evs4-p02.ka.haagnet.net\webgis$\LOGS
+
 
 # tabellen
 tabel|powerbi_cumul_aantal_viewer

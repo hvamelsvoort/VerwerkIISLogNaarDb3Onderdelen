@@ -85,7 +85,8 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
                       .ToList();
     }
     /**
-     * Ik altijd denken dat zonder meer de *.exe.config aangepast kan worden, maar dat is niet zo
+     * Ik altijd denken dat zonder meer de *.exe.config aangepast kan worden, maar dat is niet zo.
+     * Daarom deze actie, maar is inmiddels bijna geheel vervangen door stuurbestand.txt
      */
     internal void wijzigConfig() {
       // https://blogs.msdn.microsoft.com/youssefm/2010/01/21/how-to-change-net-configuration-files-at-runtime-including-for-wcf/
@@ -179,8 +180,11 @@ namespace VerwerkIISLogNaarDb3Onderdelen {
     }
     /**
      * Verplaatst de logs van de oorspronkelijke omgeving naar een centrale plek (bestemming)
+     * lokaal op de schijf in de bestemming
      */
     private static void verplaatsenLogs(string pad) {
+
+      // TODO hier nog uit het stuurbestand halen 
       string bestemming = @"D:\huub_van_amelsvoort\data\iis_advancedlog";
       string[] logBestandsNamen;
 
